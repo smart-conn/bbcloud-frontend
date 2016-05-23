@@ -1,0 +1,21 @@
+{
+  "name": "bbcloud-frontend",
+  "authors": [
+    "Gen Liu <gerald_721@hotmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ng-admin": "^0.9.1",
+    "bootstrap": "^3.3.6"
+  }
+}
