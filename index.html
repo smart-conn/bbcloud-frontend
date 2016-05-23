@@ -3,11 +3,18 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="bower_components/ng-admin/build/ng-admin.min.css">
+  <script src="sinon-server-1.17.3.js"></script>
+  <script src="bower_components/fakerest/dist/FakeRest.min.js"></script>
   <script src="bower_components/ng-admin/build/ng-admin.min.js"></script>
   <script src="bower_components/satellizer/satellizer.js"></script>
 </head>
 <body ng-app="adminControlPanel">
   <div ui-view></div>
+  <script src="api.js"></script>
+  <script src="js/administrator.js"></script>
+  <script src="js/manufacturer.js"></script>
+  <script src="js/permission.js"></script>
+  <script src="js/role.js"></script>
   <script src="admin-control-panel.js"></script>
   <!-- <script src="startup.js"></script> -->
 </body>
