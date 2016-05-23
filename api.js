@@ -4,12 +4,14 @@ var data = {
     {id: 1, name: 'admin', roleId: 1}
   ],
   roles: [
-    {id: 0, name: '管理员'},
-    {id: 1, name: '客服'}
+    {id: 0, name: '管理员', permissionIds: [1, 2]},
+    {id: 1, name: '客服', permissionIds: [3, 4]}
   ],
   permissions: [
-    {id: 0, name: '管理厂商'},
-    {id: 1, name: '管理管理员'}
+    {id: 1, name: '新增管理员', code: 'admin:create'},
+    {id: 2, name: '编辑管理员', code: 'admin:edit'},
+    {id: 3, name: '删除管理员', code: 'admin:delete'},
+    {id: 4, name: '查看管理员', code: 'admin:list'}
   ],
   manufacturers: [
     {id: 0, name: '幼米科技', status: 'passed'},

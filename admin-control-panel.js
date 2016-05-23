@@ -14,7 +14,7 @@ angular.module('adminControlPanel', [
 
 function adminControlPanelConfig(NgAdminConfigurationProvider) {
   var nga = NgAdminConfigurationProvider;
-  var admin = nga.application('Admin Control Panel').baseApiUrl('/');
+  var admin = nga.application('BBCloud 后台管理').baseApiUrl('/');
 
   admin.addEntity(nga.entity('administrators'));
   admin.addEntity(nga.entity('roles'));
@@ -25,25 +25,19 @@ function adminControlPanelConfig(NgAdminConfigurationProvider) {
   permissionConfig(nga, admin);
   manufacturerConfig(nga, admin);
 
-  admin.header([
-    '<div class="navbar-header">',
-      '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">',
-        '<span class="sr-only">Toggle navigation</span>',
-        '<span class="icon-bar"></span>',
-        '<span class="icon-bar"></span>',
-        '<span class="icon-bar"></span>',
-      '</button>',
-      '<a class="navbar-brand" href="#" ng-click="appController.displayHome()">{{::appController.applicationName}}</a>',
-    '</div>',
-    '<ul class="nav navbar-top-links navbar-right hidden-xs">',
-      '<li>',
-        '<a ui-sref="signOut"">logout</a>',
-      '</li>',
-    '</ul>'
-  ].join(''));
+  admin.menu(menuConfig(nga, admin));
+  admin.header(headerConfig());
+  admin.dashboard(nga.dashboard());
 
   nga.configure(admin);
 }
+
+// function translationConfig($translateProvider) {
+//   $translateProvider.translations('zh', {
+//     Name: '名称'
+//   });
+//   $translateProvider.preferredLanguage('zh');
+// }
 
 function signInConfig($stateProvider, $authProvider) {
   var signInStateName = SIGN_IN_STATE_NAME;
