@@ -1,6 +1,11 @@
 function menuConfig(nga, admin) {
   return nga.menu()
     .addChild(nga.menu()
+      .title('厂商管理')
+      .icon('<i class="fa fa-industry fa-fw"></i>')
+      .link('/manufacturers/list')
+    )
+    .addChild(nga.menu()
       .title('系统管理')
       .addChild(nga.menu()
         .title('管理员账户')
@@ -17,10 +22,5 @@ function menuConfig(nga, admin) {
         .icon('<i class="fa fa-balance-scale fa-fw"></i>')
         .link('/permissions/list')
       )
-    )
-    .addChild(nga.menu()
-      .title('厂商管理')
-      .icon('<i class="fa fa-industry fa-fw"></i>')
-      .link('/manufacturers/list')
     );
 }
