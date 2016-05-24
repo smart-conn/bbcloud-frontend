@@ -2,6 +2,8 @@ function manufacturerConfig(nga, admin) {
 
   var manufacturer = admin.getEntity('manufacturers');
 
+  manufacturer.identifier(nga.field('_id'));
+
   manufacturer.listView()
     .title('厂商管理')
     .fields([
@@ -13,7 +15,7 @@ function manufacturerConfig(nga, admin) {
           {label: '待审核', value: 'pending'}
         ])
     ])
-    .actions(['batch'])
+    // .actions(['batch'])
     .listActions(['edit', 'delete']);
 
   manufacturer.creationView()
@@ -30,7 +32,6 @@ function manufacturerConfig(nga, admin) {
           {label: '审核失败', value: 'failed'},
           {label: '待审核', value: 'pending'}
         ])
-
     ]);
 
 }

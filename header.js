@@ -11,7 +11,7 @@ function headerConfig() {
     '</div>',
     '<ul class="nav navbar-top-links navbar-right hidden-xs">',
       '<li>',
-        '<a ui-sref="signOut"">注销</a>',
+        '<a ui-sref="signOut"">登出</a>',
       '</li>',
     '</ul>'
   ].join('');

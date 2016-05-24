@@ -14,7 +14,8 @@ angular.module('adminControlPanel', [
 
 function adminControlPanelConfig(NgAdminConfigurationProvider) {
   var nga = NgAdminConfigurationProvider;
-  var admin = nga.application('BBCloud 后台管理').baseApiUrl('/');
+  var admin = nga.application('BBCloud 后台管理')
+    .baseApiUrl('http://127.0.0.1:3000/api/');
 
   admin.addEntity(nga.entity('administrators'));
   admin.addEntity(nga.entity('roles'));
