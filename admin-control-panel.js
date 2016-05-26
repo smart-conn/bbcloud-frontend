@@ -88,12 +88,13 @@ function SignInController($auth, $location) {
 adminApp.directive('changePwd', function(Restangular, $state, notification, $http) {
   return {
     restrict: 'E',
+    scope: true,
     link: function(scope, element, attrs) {
       scope.changePWD = () => {
         $(".modal", element).modal('show');
         scope.password = "";
         scope.confirm = "";
-        scope.id = JSON.parse(attrs.review).id;
+        scope.id = JSON.parse(attrs.administrator).id;
       }
       scope.changePWDBtn = function() {
         $(".modal", element).modal('hide');

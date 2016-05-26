@@ -15,7 +15,7 @@ function administratorConfig(nga, admin) {
     .listActions([
       'edit',
       'delete',
-      '<change-pwd review="{{entry.values}}"></change-pwd>'
+      '<change-pwd administrator="{{entry.values}}"></change-pwd>'
     ]);
 
   administrator.creationView()
