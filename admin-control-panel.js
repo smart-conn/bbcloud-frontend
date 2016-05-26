@@ -4,10 +4,10 @@ var SIGN_OUT_STATE_NAME = 'signOut';
 var SIGN_IN_REDIRECT_TO = '/dashboard';
 var SIGN_OUT_REDIRECT_TO = '/sign-in';
 
-angular.module('adminControlPanel', [
-  'ng-admin',
-  'satellizer'
-]).config(adminControlPanelConfig)
+var adminApp = angular.module('adminControlPanel', [
+    'ng-admin',
+    'satellizer'
+  ]).config(adminControlPanelConfig)
   .config(signInConfig)
   .run(anonymousRedirect)
   .controller('SignInController', SignInController);
@@ -44,7 +44,7 @@ function signInConfig($stateProvider, $authProvider) {
   var signInStateName = SIGN_IN_STATE_NAME;
   var signOutStateName = SIGN_OUT_STATE_NAME;
   var signOutRedirectTo = SIGN_OUT_REDIRECT_TO;
-  $authProvider.baseUrl = 'http://localhost:3001/';
+  $authProvider.baseUrl = 'http://127.0.0.1:3001/';
   $authProvider.loginUrl = '/auth/administrator/login';
   $stateProvider.state(signInStateName, {
     url: '/sign-in',
@@ -84,3 +84,64 @@ function SignInController($auth, $location) {
       });
   };
 }
+
+adminApp.directive('changePwd', function(Restangular, $state, notification, $http) {
+  return {
+    restrict: 'E',
+    scope: true,
+    link: function(scope, element, attrs) {
+      scope.changePWD = () => {
+        $(".modal", element).modal('show');
+        scope.password = "";
+        scope.confirm = "";
+        scope.id = JSON.parse(attrs.administrator).id;
+      }
+      scope.changePWDBtn = function() {
+        $(".modal", element).modal('hide');
+        if (scope.password == scope.confirm) {
+          $http.post("http://127.0.0.1:3001/auth/administrator/changepwd", {
+            password: scope.password,
+            id: scope.id
+          }).success(function(data) {
+            if (data.code == 200) {
+              notification.log("Password Change Success.", { addnCls: 'humane-flatty-success' })
+            } else {
+              notification.log("Password Change Error.", { addnCls: 'humane-flatty-error' })
+            }
+          });
+        } else {
+          notification.log("Password Change Error.", { addnCls: 'humane-flatty-error' })
+        }
+      }
+    },
+    template: `<button class="btn btn-default btn-xs" ng-click="changePWD()"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>ChangePWD</button>
+      <div class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="modal-title">
+                Change Password
+              </div>
+            </div>
+            <div class="modal-body">
+              <form class="form">
+                <div class="form-group">
+                  <label class="">Password</label>
+                  <input type="password" class="form-control" ng-model="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <label>Confirm Password</label>
+                  <input type="password" class="form-control" ng-model="confirm" placeholder="Confirm Password">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" ng-click="changePWDBtn()">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  }
+});
