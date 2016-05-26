@@ -7,12 +7,16 @@ function administratorConfig(nga, admin) {
     .title('管理员账户')
     .fields([
       nga.field('name').label('名称'),
-      nga.field('roleId', 'reference').label('角色')
-        .targetEntity(role)
-        .targetField(nga.field('name'))
+      nga.field('role', 'reference').label('角色x')
+      .targetEntity(role)
+      .targetField(nga.field('name'))
     ])
     .actions(['batch', 'create'])
-    .listActions(['edit', 'delete']);
+    .listActions([
+      'edit',
+      'delete',
+      '<change-pwd review="{{entry.values}}"></change-pwd>'
+    ]);
 
   administrator.creationView()
     .fields([
@@ -22,9 +26,9 @@ function administratorConfig(nga, admin) {
   administrator.editionView()
     .fields([
       nga.field('name'),
-      nga.field('roleId', 'reference').label('角色')
-        .targetEntity(role)
-        .targetField(nga.field('name'))
+      nga.field('role', 'reference').label('角色')
+      .targetEntity(role)
+      .targetField(nga.field('name'))
     ]);
 
 }
